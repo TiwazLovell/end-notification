@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+
+    <changeSet id="01" author="rcracea">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="notifications"/>
+            </not>
+        </preConditions>
+        <createTable tableName="notifications">
+            <column name="notification_id" type="uuid">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="employee_id" type="uuid"/>
+            <column name="message" type="varchar(255)"/>
+            <column name="notification_date" type="timestamp"/>
+            <column name="status" type="varchar(15)"/>
+            <column name="user_type" type="varchar(15)"/>
+            <column name="notification_type" type="varchar(25)" defaultValue="HEALTH">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+
+</databaseChangeLog>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+
+    <changeSet id="23.03.2023-1" author="rcracea">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <viewExists viewName="status_info"/>
+            </not>
+        </preConditions>
+        <sql>
+            create type status_info AS ENUM (
+            'READ',
+            'UNREAD'
+            )
+
+        </sql>
+    </changeSet>
+    <changeSet id="23.03.2023-2" author="rcracea">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="notifications" columnName="userType"/>
+            </not>
+        </preConditions>
+        <sql>
+            create type user_type AS ENUM (
+            'ADMIN',
+            'EMPLOYEE'
+            )
+
+        </sql>
+    </changeSet>
+    <changeSet id="23.03.2023-3" author="rcracea">
+        <preConditions onFail="MARK_RAN">
+            <columnExists tableName="notifications" columnName="notificationType"/>
+        </preConditions>
+        <sql>
+            create type notification_type AS ENUM (
+            'HEALTH',
+            'MEAL_TICKETS',
+            'WELLNESS',
+            'PARKING'
+            )
+
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>

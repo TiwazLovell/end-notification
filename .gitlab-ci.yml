@@ -1,0 +1,8 @@
+include:
+  - project: endava/isd/bench-initiative/devops/pipelines
+    ref: main # Git branch
+    file:
+      - /ci_templates/all_apps_ci.yml
+
+variables:
+  IMAGE_REPOSITORY_NAME: beneficio/${CI_PROJECT_NAME}

@@ -1,0 +1,254 @@
+openapi: 3.0.1
+info:
+  title: Notification service
+  version: v0.4
+servers:
+  - url: http://localhost:8002/j
+    description: Generated server url
+paths:
+  /notifications:
+    post:
+      tags:
+        - notification-controller
+      operationId: postNotification
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NotificationRequestDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+  /notifications/{notificationId}/status:
+    patch:
+      tags:
+        - notification-controller
+      operationId: update
+      parameters:
+        - name: notificationId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: OK
+  /notifications/employee-notifications/{userId}:
+    patch:
+      tags:
+        - notification-controller
+      operationId: readAllNotificationsForEmployee
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: OK
+  /notifications/admin-notifications/{userId}:
+    patch:
+      tags:
+        - notification-controller
+      operationId: readAllNotificationsForAdmin
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: OK
+  /notifications/{notificationId}:
+    get:
+      tags:
+        - notification-controller
+      operationId: getNotificationById
+      parameters:
+        - name: notificationId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/NotificationResponseDTO'
+    delete:
+      tags:
+        - notification-controller
+      operationId: delete
+      parameters:
+        - name: notificationId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: OK
+  /notifications/subscribe/employee/{userId}:
+    get:
+      tags:
+        - notification-controller
+      operationId: subscribeEmployee
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SseEmitter'
+  /notifications/subscribe/admin/{userId}:
+    get:
+      tags:
+        - notification-controller
+      operationId: subscribeAdmin
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SseEmitter'
+  /notifications/employee/{userId}:
+    get:
+      tags:
+        - notification-controller
+      operationId: getAllNotificationsForAnEmployee
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NotificationResponseDTO'
+  /notifications/admin/{userId}:
+    get:
+      tags:
+        - notification-controller
+      operationId: getAllNotificationsForAdmin
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NotificationResponseDTO'
+components:
+  schemas:
+    NotificationRequestDTO:
+      required:
+        - message
+        - notificationId
+        - notificationType
+        - status
+        - userID
+        - userType
+      type: object
+      properties:
+        notificationId:
+          type: string
+          format: uuid
+        userID:
+          type: string
+          format: uuid
+        userType:
+          type: string
+          enum:
+            - ADMIN
+            - EMPLOYEE
+        message:
+          type: string
+        status:
+          type: string
+          enum:
+            - READED
+            - NOTREADED
+        notificationType:
+          type: string
+          enum:
+            - MEAL_TICKETS
+            - WELLNESS
+            - PARKING
+        additionalData:
+          type: object
+          additionalProperties:
+            type: object
+    NotificationResponseDTO:
+      type: object
+      properties:
+        notificationId:
+          type: string
+          format: uuid
+        userID:
+          type: string
+          format: uuid
+        userType:
+          type: string
+          enum:
+            - ADMIN
+            - EMPLOYEE
+        message:
+          type: string
+        status:
+          type: string
+          enum:
+            - READED
+            - NOTREADED
+        notificationDate:
+          type: string
+          format: date-time
+        additionalData:
+          type: object
+          additionalProperties:
+            type: object
+    SseEmitter:
+      type: object
+      properties:
+        timeout:
+          type: integer
+          format: int64

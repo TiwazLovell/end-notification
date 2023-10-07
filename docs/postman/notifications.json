@@ -1,0 +1,278 @@
+{
+	"info": {
+		"_postman_id": "e6b41ddc-6207-4223-962e-54a7f2d4631e",
+		"name": "Notifications",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21678356"
+	},
+	"item": [
+		{
+			"name": "SSE employee subscribe",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8002/j/notifications/subscribe/employee/{userId}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8002",
+					"path": [
+						"j",
+						"notifications",
+						"subscribe",
+						"employee",
+						"{userId}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SSE admin subscribe",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8002/j/notifications/subscribe/admin/{userId}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8002",
+					"path": [
+						"j",
+						"notifications",
+						"subscribe",
+						"admin",
+						"{userId}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a notification by id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8002/j/notifications/{notificationId}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8002",
+					"path": [
+						"j",
+						"notifications",
+						"{notificationId}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update status",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"message\": \"update\",\r\n    \"userType\": \"EMPLOYEE\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8002/j/notifications/{notificationId}/status",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8002",
+					"path": [
+						"j",
+						"notifications",
+						"{notificationId}",
+						"status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read all notifications for employee",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8002/j/notifications/employee-notifications/{userId}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8002",
+					"path": [
+						"j",
+						"notifications",
+						"employee-notifications",
+						"{userId}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read all notifications for admin",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8002/j/notifications/admin-notifications/{userId}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8002",
+					"path": [
+						"j",
+						"notifications",
+						"admin-notifications",
+						"{userId}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add a new notification",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"notificationId\":\"dfa85288-19b9-4853-ab28-b66e9558ed50\",\r\n    \"userID\": \"d5699278-dcd7-4cfe-9e62-f53b4d99bf12\",\r\n    \"userType\":\"EMPLOYEE\",\r\n    \"message\": \"test1\",\r\n    \"notificationType\": \"HEALTH\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8002/j/notifications",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8002",
+					"path": [
+						"j",
+						"notifications"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all notifications for an Employee",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8002/j/notifications/employee/{userId}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8002",
+					"path": [
+						"j",
+						"notifications",
+						"employee",
+						"{userId}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all notifications for admin",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8002/j/notifications/admin/{userId}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8002",
+					"path": [
+						"j",
+						"notifications",
+						"admin",
+						"{userId}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
